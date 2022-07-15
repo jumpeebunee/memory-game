@@ -92,6 +92,11 @@ body {
     .content {
         max-width: 220px;
     }
+
+    .btn {
+        padding: 15px 40px;
+        font-size: 22px;
+    }
     
 }
 
@@ -105,6 +110,11 @@ body {
 
     .content {
         max-width: 100px;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 15px;
     }
     
 }
