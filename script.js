@@ -22,6 +22,8 @@ function startGame() {
     };
 
     function getUserCard(e) {
+        if (prewCard.length > 1) return;
+
         const current = e.target;
         const currentValue = current.dataset.value;
         current.classList.add('is-open');
@@ -50,6 +52,10 @@ function startGame() {
 
     function getEvent(eventList) {
         eventList.addEventListener('click', getUserCard);
+    };
+
+    function removeEvent(eventList) {
+        eventList.removeEventListener('click', getUserCard);
     };
 
     function getRandomNumber() {
