@@ -23,7 +23,9 @@ body {
     font-size: 24px;
     color: #fff;
     transform: rotateY(-180deg);
-    transition: all linear .5s;
+    transition-property: color, background-color, transform;
+    transition-timing-function: ease-out;
+    transition-duration: .7s;
 }
 
 .block:hover {
@@ -32,9 +34,15 @@ body {
 }
 
 .is-open {
-    transition: all linear 1s;
+    transition-property: color, background-color, transform;
+    transition-timing-function: ease-out;
+    transition-duration: .7s;
     transform: none;
     background-color: #2b98f8;
+}
+
+.is-open:hover {
+    background-color: #1d6aad;
 }
 
 .content {
@@ -44,31 +52,6 @@ body {
     max-width: 615px;
     width: 100%;
     gap: 5px;
-}
-
-.btn {
-    padding: 20px 60px;
-    background-image: linear-gradient(144deg,#e84a6e, #2b98f8 90%,#00DDEB);
-    font-size: 24px;
-    color: #fff;
-    border: solid 2px #fff;
-    transition: all linear .3s;
-}
-
-.btn:hover {
-    color: #01061a;
-    border: solid 2px #fff;
-}
-
-.btn-start {
-    transform: scale(0%);
-}
-
-@media (min-width: 768px) {
-  .button-64 {
-    font-size: 24px;
-    min-width: 196px;
-  }
 }
 
 @media (max-width: 772px) {
@@ -92,11 +75,6 @@ body {
     .content {
         max-width: 220px;
     }
-
-    .btn {
-        padding: 15px 40px;
-        font-size: 22px;
-    }
     
 }
 
@@ -110,11 +88,6 @@ body {
 
     .content {
         max-width: 100px;
-    }
-
-    .btn {
-        padding: 5px 10px;
-        font-size: 15px;
     }
     
 }
