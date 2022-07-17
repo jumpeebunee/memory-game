@@ -1,26 +1,51 @@
 function startGame() {
     const container = document.querySelector('.container');
     const content = document.createElement('div');
-    content.classList.add('content', 'content-close');
+    content.classList.add('content', 'close');
 
     const stack = [];
     let prewCard = [];
+
     let scores = 0;
+    let scoreToWin = null;
 
-    let choices = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
+    let choices = [];
 
-    gameStarted();
+    let startingForm = createForm();
+    container.append(startingForm.form);
 
-    function gameStarted() {
+    startingForm.inputBtn.addEventListener('click', getTotalCards);
+
+    function getTotalCards(e) {
+        e.preventDefault();
+        let value = Number(startingForm.input.value);
+        if (value <= 0 || value > 10 || value % 2 !== 0) {
+            startingForm.input.value = '4'
+            return;
+        };
+        let totalCards = value * value;
+        for (let i = 1; i <= totalCards / 2; i++) {
+            choices.push(i);
+            choices.push(i);
+        };
+        scoreToWin = value;
+        gameStarted(totalCards);
+    };
+
+    function gameStarted(value) {
+        startingForm.form.classList.add('close');
         container.append(content);
-        for (let i = 1; i <= 16; i++) {
+        for (let i = 1; i <= value; i++) {
             const card = document.createElement('div');
-            card.dataset.value = getRandomNumber();
+            card.dataset.value = getRandomNumber(value / 2);
             card.classList.add('block');
             getEvent(card);
             content.append(card);
         };
-        setTimeout(() => content.classList.remove('content-close'), 1000);
+
+        setTimeout(() => {
+            content.classList.remove('close');
+        }, 1000);
     };
 
     function getUserCard(e) {
@@ -51,13 +76,34 @@ function startGame() {
                 });
             }, 1000);
         };
-        console.log(scores)
 
-        if (scores === 1) restartGame();
+        if (scores === scoreToWin) restartGame();
     };
 
     function getEvent(eventList) {
         eventList.addEventListener('click', getUserCard);
+    };
+
+    function createForm() {
+        const form  = document.createElement('form');
+        const input = document.createElement('input');
+        const inputBtn = document.createElement('button');
+        
+        form.classList.add('input-group', 'input-group-lg', 'w-50', 'open');
+        input.classList.add('form-control');
+        input.placeholder = 'Enter the number of cards from 2 to 10';
+        input.type = 'number';
+        inputBtn.classList.add('btn', 'btn-primary');
+        inputBtn.textContent = 'Start Game';
+
+        form.append(input);
+        form.append(inputBtn);
+
+        return {
+            form,
+            input,
+            inputBtn,
+        };
     };
 
     function restartGame() {
@@ -68,7 +114,7 @@ function startGame() {
         setTimeout(() => {button.classList.remove('btn-anim')},1000);
         button.addEventListener('click', () => {
             button.classList.add('btn-anim');
-            content.classList.add('content-close');
+            content.classList.add('close');
             setTimeout(() => {
                 container.innerHTML = '';
                 startGame();

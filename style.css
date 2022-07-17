@@ -57,6 +57,20 @@ body {
     opacity: 1;
 }
 
+.open {
+    transform: none;
+    transition: all linear .9s;
+    opacity: 1;
+    visibility: visible;
+}
+
+.close {
+    transition: all linear .5s; 
+    transform: translateX(200%);
+    opacity: 0;
+    visibility: hidden
+};
+
 .content-close {
     transition: all linear .5s; 
     transform: translateX(200%);
