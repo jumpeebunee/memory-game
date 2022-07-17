@@ -25,7 +25,7 @@ body {
     transform: rotateY(-180deg);
     transition-property: color, background-color, transform;
     transition-timing-function: ease-out;
-    transition-duration: .7s;
+    transition-duration: .5s;
 }
 
 .block:hover {
@@ -33,15 +33,15 @@ body {
     background-color: #8f2a41;
 }
 
-.is-open {
+.card-open {
     transition-property: color, background-color, transform;
     transition-timing-function: ease-out;
-    transition-duration: .7s;
+    transition-duration: .5s;
     transform: none;
     background-color: #007bff;
 }
 
-.is-open:hover {
+.card-open:hover {
     background-color: #1d6aad;
 }
 
@@ -52,41 +52,41 @@ body {
     max-width: 615px;
     width: 100%;
     gap: 5px;
-    transform: none;
-    transition: all linear .9s;
-    opacity: 1;
+    transition: all linear .8s; 
+    transform: translateX(200%);
+    visibility: hidden;
+    opacity: 0;
 }
 
-.open {
+.content-open {
+    transition: all linear .8s;
     transform: none;
-    transition: all linear .9s;
-    opacity: 1;
     visibility: visible;
-}
-
-.close {
-    transition: all linear .5s; 
-    transform: translateX(200%);
-    opacity: 0;
-    visibility: hidden
-};
-
-.content-close {
-    transition: all linear .5s; 
-    transform: translateX(200%);
-    opacity: 0;
-}
-
-.btn {
-    transform: translateY(0);
     opacity: 1;
-    transition: all linear .5s;
 }
 
-.btn-anim {
+.btn-restart {
     transition: all linear .5s;
     opacity: 0;
     transform: translateY(50%);
+}
+
+.btn-restart-anim {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all linear .5s;
+} 
+
+.form {
+    transition: all linear .5s;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+
+.form-anim {
+    transition: all linear .5s;
+    transform: none;
+    opacity: 1;
 }
 
 @media (max-width: 772px) {
