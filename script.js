@@ -1,10 +1,11 @@
 function startGame() {
     const container = document.querySelector('.container');
     const content = document.createElement('div');
-    content.classList.add('content');
+    content.classList.add('content', 'content-close');
 
     const stack = [];
     let prewCard = [];
+    let scores = 0;
 
     let choices = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
 
@@ -19,6 +20,7 @@ function startGame() {
             getEvent(card);
             content.append(card);
         };
+        setTimeout(() => content.classList.remove('content-close'), 1000);
     };
 
     function getUserCard(e) {
@@ -35,6 +37,7 @@ function startGame() {
         if (stack.length === 0) {
             stack.push(currentValue);
         } else if (stack[0] === currentValue) {
+            scores += 1;
             prewCard = [];
             stack.pop();
         } else {
@@ -46,16 +49,31 @@ function startGame() {
                     prewCard = [];
                     stack.pop();
                 });
-            }, 1000)
+            }, 1000);
         };
+        console.log(scores)
+
+        if (scores === 1) restartGame();
     };
 
     function getEvent(eventList) {
         eventList.addEventListener('click', getUserCard);
     };
 
-    function removeEvent(eventList) {
-        eventList.removeEventListener('click', getUserCard);
+    function restartGame() {
+        const button = document.createElement('button');
+        button.classList.add('btn','btn-primary', 'btn-lg', 'mt-5', 'btn-anim', 'absolute-bottom');
+        button.textContent = 'Start New Game';
+        container.append(button);
+        setTimeout(() => {button.classList.remove('btn-anim')},1000);
+        button.addEventListener('click', () => {
+            button.classList.add('btn-anim');
+            content.classList.add('content-close');
+            setTimeout(() => {
+                container.innerHTML = '';
+                startGame();
+            }, 2000);
+        });
     };
 
     function getRandomNumber() {
