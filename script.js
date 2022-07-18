@@ -21,9 +21,9 @@ function createGame() {
         const input = document.createElement('input');
         const inputBtn = document.createElement('button');
         
-        form.classList.add('input-group', 'input-group-lg', 'w-50', 'form');
-        input.classList.add('form-control');
-        input.placeholder = 'Enter the number of cards from 2 to 10';
+        form.classList.add('input-group', 'input-group-lg', 'form');
+        input.classList.add('form-control', 'input');
+        input.placeholder = 'Number from 2 to 10';
         input.type = 'number';
         inputBtn.classList.add('btn', 'btn-primary');
         inputBtn.textContent = 'Start Game';

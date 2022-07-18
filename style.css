@@ -78,6 +78,7 @@ body {
 } 
 
 .form {
+    width: 100%;
     transition: all linear .5s;
     transform: translateY(-50%);
     opacity: 0;
@@ -126,6 +127,10 @@ body {
         max-width: 220px;
     }
     
+    .input::placeholder {
+        font-size: 16px;
+    }
+
 }
 
 @media (max-width: 300px) {
@@ -139,6 +144,10 @@ body {
 
     .content {
         max-width: 100px;
+    }
+
+    .input::placeholder {
+        font-size: 12px;
     }
     
 }
