@@ -41,6 +41,13 @@ function createGame() {
     
     };
 
+    function createTimer() {
+        const timer = document.createElement('div');
+        timer.classList.add('timer');
+        timer.textContent = '1:00';
+        return timer;
+    };
+
     function getTotalCards(e) {
 
         e.preventDefault();
@@ -53,7 +60,7 @@ function createGame() {
         };
     
         const totalCards = value * value;
-        scoreToWin = value;
+        scoreToWin = totalCards / 2;
     
         for (let i = 1; i <= totalCards / 2; i++) {
             gameCards.push(i);
@@ -67,18 +74,42 @@ function createGame() {
     function gameStart(value) {
 
         const form = document.querySelector('form');
+        const timer = createTimer();
     
         content.classList.add('content');
         form.classList.remove('form-anim');
     
+        container.append(timer);
         container.append(content);
     
         for (let i = 1; i <= value; i++) {
             createCardElem(content);
         };
     
+        setTimeout(() => timer.classList.add('timer-anim'), 500);
         setTimeout(() => content.classList.add('content-open'), 500);
+
+        gameTimer(timer);
     
+    };
+
+    function gameTimer(timer) {
+        let time = 59;
+        let timerId = setInterval(() => {
+            if(time === 0) {
+                timerId = clearInterval(timerId)
+                restartGame();
+            } else if (scores === scoreToWin) {
+                timerId = clearInterval(timerId);
+            };
+            
+            if (time.toString().length === 1) {
+                timer.textContent = `0:0${time}`;
+            } else {
+                timer.textContent = `0:${time}`;
+            };
+            time -= 1;
+        }, 1000);
     };
 
     function createCardElem(content) {
@@ -116,7 +147,6 @@ function createGame() {
     
     };
     
-
     function checkUserCard(currentValue) {
         if (stack.length === 0) {
             stack.push(currentValue);
@@ -139,20 +169,25 @@ function createGame() {
     
     function restartGame() {
     
+        const timer = document.querySelector('.timer');
+        const card = document.querySelectorAll('.block');
         const button = document.createElement('button');
+
+        card.forEach((item) => item.removeEventListener('click', getUserCard))
     
         button.classList.add('btn','btn-primary', 'btn-lg', 'mt-5', 'btn-restart', 'absolute-bottom');
         button.textContent = 'Start New Game';
         container.append(button);
     
         setTimeout(() => button.classList.add('btn-restart-anim'), 1000);
-        button.addEventListener('click', () => clickToButton(button));
+        button.addEventListener('click', () => clickToButton(button, timer));
     
     };
     
-    function clickToButton(button) {
+    function clickToButton(button, timer) {
         button.classList.remove('btn-restart-anim');
         content.classList.remove('content-open');
+        timer.classList.remove('timer-anim');
         setTimeout(() => {
             container.innerHTML = '';
             createGame();

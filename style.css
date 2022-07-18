@@ -89,6 +89,21 @@ body {
     opacity: 1;
 }
 
+.timer {
+    margin-bottom: 10px;
+    transition: all linear .5s;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #fff;
+    font-size: 24px;
+}
+
+.timer-anim {
+    transition: all linear .5s;
+    transform: none;
+    opacity: 1;
+}
+
 @media (max-width: 772px) {
 
     .block {
